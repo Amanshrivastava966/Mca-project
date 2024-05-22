@@ -1,0 +1,615 @@
+<!-- <?php
+
+$conn = mysqli_connect('localhost','root','','contact_db') or die('connection failed');
+
+if(isset($_POST['submit'])){
+
+   $name = mysqli_real_escape_string($conn, $_POST['name']);
+   $email = mysqli_real_escape_string($conn, $_POST['email']);
+   $number = $_POST['number'];
+   $date = $_POST['date'];
+
+   $insert = mysqli_query($conn, "INSERT INTO `contact_form`(name, email, number, date) VALUES('$name','$email','$number','$date')") or die('query failed');
+
+   if($insert){
+      $message[] = 'appointment made successfully!';
+   }else{
+      $message[] = 'appointment failed';
+   }
+
+}
+?>  -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hospital website </title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css\style.css">
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="#" class="logo"><img src="png\logo.png" alt=""></a>
+
+    <nav class="navbar">
+        <ul>
+        <li><a href="#home">home</a></li>
+        <li><a href="#about">about</a></li>
+        <li><a href="#services">services</a></li>
+        <li><a href="#doctors">doctors</a></li>        
+        <li><a href="#appointment">appointment</a></li>        
+        <li><a href="#review">review</a></li>
+        <li><a href="#notice">notice</a></li>
+        <li class="dropdown"><a href="#" class="fas fa-user" style="padding-left:25px ;"></a>     
+            <ul class="dropdown-menu">
+            <li><a href="#"  class="profile" >Profile</a></li>
+            <li><a href="#">Appointment</a></li>
+            <li><a href="#" style="color: red;">Log Out    <i class="fas fa-sign-out-alt" style="height:2.5rem; width:2.5rem;"></i></a></li>
+            </ul>
+       </li>   
+    </ul>
+    </nav>
+    <div id="menu-btn" class="fas fa-bars"></div>
+
+  <!-- pop-up window for user profile   -->
+    <div class="overlay" id="profile-overlay" onclick="closeProfilePopup()"></div>
+<div class="popup" id="profile-popup">
+    <form action="">
+    <span class="close-btn" onclick="closeProfilePopup()">X</span>
+    <h2>MY PROFILE</h2>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" placeholder="Type Your Name" required>
+  
+    <label for="idCard">ID Card Number:</label>
+    <input type="text" id="idCard" name="idCard" placeholder="Type Your I'D Card no" required>
+  
+    <label for="idCardImage" >ID Card Image:</label>
+    <input type="file" id="idCardImage" name="idCardImage" placeholder="Upload Your I'D Card image" required>
+
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" name="dob" placeholder="Select Your D.O.B" required>
+    
+    <!-- <label for="mobile">Mobile Number:</label>
+    <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" placeholder="Enter 10-digit mobile number" required> -->
+    
+    <!-- <label for="bloodGroup">Blood Group:</label>
+    <div class="select">
+    <select id="bloodGroup" name="bloodGroup" required>
+      <option value="sao">Select a option</option>
+      <option value="A+">A+</option>
+      <option value="A+">A-</option>
+      <option value="B+">B+</option>
+      <option value="A+">B-</option>
+      <option value="O+">O+</option>
+      <option value="O+">O-</option>
+      <option value="AB+">AB+</option>
+      <option value="AB+">AB-</option>
+      <option value="AB+">Don't Know</option>
+    </select>
+    </div> -->
+
+    <label for="deptName">Department Name:</label>
+    <input type="text" id="deptName" name="deptName"  placeholder="Type Your Dept. Name" required>
+  
+    <label for="semester">Current Semester:</label>
+    <div class="select">
+    <select id="bloodGroup" name="bloodGroup" required>
+        <option value="sao2">Select a option</option>
+        <option value="1st">1st</option>
+        <option value="2nd">2nd</option>
+        <option value="3rd">3rd</option>
+        <option value="4th">4th</option>
+        <option value="5th">5th</option>
+        <option value="6th">6th</option>
+        <option value="7th">7th</option>
+        <option value="8th">8th</option>
+        <option value="research-scholar">Research-scholar</option>
+        <option value="faculity">faculity Member</option>
+      </select>
+    </div>
+
+    <button onclick="submitProfileForm()">SAVE</div>
+</form>
+</div>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+
+    <div class="image">
+        <img src="image/home-img.svg" alt="">
+    </div>
+
+    <div class="content">
+        <h3>we take care of your healthy life</h3>
+        <p>Health is the biggest wealth for a human being in his/her entire lifetime. A person who has good physical health is likely to have bodily functions and processes working at their peak.</p>
+        <a href="#appointment" class="btn"> appointment us <span class="fas fa-chevron-right"></span> </a>
+    </div>
+
+</section>
+
+<!-- home section ends -->
+
+<!-- icons section starts  -->
+
+<section class="icons-container">
+
+    <div class="icons">
+        <i class="fas fa-user-md"></i>
+        <h3>6+</h3>
+        <p>doctors at work</p>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-users"></i>
+        <h3>2.5K+</h3>
+        <p>satisfied patients</p>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-ambulance"></i>
+        <h3>24/7</h3>
+        <p>Ambulance facility</p>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-pills"></i>
+        <h3>150+</h3>
+        <p>available medicines</p>
+    </div>
+
+</section>
+
+<!-- icons section ends -->
+
+<!-- about section starts  -->
+
+<section class="about" id="about">
+
+    <h1 class="heading"> <span>about</span> us </h1>
+
+    <div class="row">
+
+        <div class="image">
+            <img src="image/about-img.svg" alt="">
+        </div>
+
+        <div class="content">
+            <h3>take the world's best quality treatment</h3>
+            <p>Welcome to the University of North Bengal Health Center Management System!
+
+                At North Bengal University, we are dedicated to enhancing the healthcare experience for our students, faculty members, and staff. The Health Center Management System is an innovative solution designed to streamline the appointment process, improve accessibility to healthcare services, and ensure a seamless experience for both patients and healthcare providers.</p>
+            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- about section ends -->
+
+<!-- services section starts  -->
+
+<section class="services" id="services">
+
+    <h1 class="heading"> our <span>services</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <i class="fas fa-notes-medical"></i>
+            <h3>free checkups</h3>
+            <p>We are pleased to offer always Free Check-Up service to ensure that everyone has the opportunity to prioritize their health and well-being.</p>
+            <a href="#appointment" class="btn"> Appointment Now <span class="fas fa-chevron-right"></span> </a>
+        </div>
+
+        <div class="box">
+            <i class="fas fa-ambulance"></i>
+            <h3>24/7 ambulance</h3>
+            <p>24/7 Ambulance Service guarantees an immediate response to emergency calls. Whether you're on campus or in the surrounding areas.</p>
+            <a href="tel:9635350228" class="btn"> Contact now <span class="fas fa-chevron-right"></span> </a>
+        </div>
+
+        <div class="box">
+            <i class="fas fa-user-md"></i>
+            <h3>expert doctors</h3>
+            <p>six or more distinguished healthcare professionals who bring a wealth of expertise to cater to your specific healthcare needs.</p>
+            <a href="#doctors" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+        </div>
+
+        <div class="box">
+            <i class="fas fa-pills"></i>
+            <h3>medicines</h3>
+            <p>We provides you with access to a comprehensive list of over 150 medicines, ensuring that your pharmaceutical needs are met conveniently and efficiently.</p>
+            <a href="#appointment" class="btn"> Appointment Now <span class="fas fa-chevron-right"></span> </a>
+        </div>
+
+        <div class="box">
+            <i class="fas fa-procedures"></i>
+            <h3>bed facility</h3>
+            <p>We have 2 bed facility at Health Center for Emergency.If you have any questions or specific needs related to our Bed Facility, please don't hesitate to ................</p>
+            <a href="tel: +91 353 2699108" class="btn"> Contact Us <span class="fas fa-chevron-right"></span> </a>
+        </div>
+
+        <div class="box">
+            <i class="fas fa-heartbeat"></i>
+            <h3>total care</h3>
+            <p>Total Care is not just a service; it's a commitment to your overall well-being.We are here to provide the care and support you deserve.</p>
+            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- services section ends -->
+
+
+
+<!-- doctors section starts  -->
+
+<section class="doctors" id="doctors">
+
+    <h1 class="heading"> our <span>doctors</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="image\zakia_banu.jpg" alt="">
+            <h3>Dr. Zakia Banu</h3>
+            <strong><span> MBBS,PGDHHM,PGDMCH</span></strong>
+            <p>	Dip. In Obs and Womans Health (Ireland)</p>            
+            <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+                
+            </div>
+        </div>
+        <div class="box">
+            <img src="image/doc-2.jpg" alt="">
+            <h3>Dr. Bipul Das</h3>
+            <strong><span> M.B.B.S, D.O, M.A.I.O.S</span></strong>
+            <p>Eye Surgeon</p>
+            <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+            
+            </div>
+        </div>
+        <div class="box">
+            <img src="image/doc-5.jpg" alt="">
+            <h3>Dr. Amlan Ghosh</h3>
+            <strong><span>B.D.S</span></strong>
+            <p>Dental and Oral surgen</p>
+            <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="image/doc-6.jpg" alt="">
+            <h3>Dr. Ravi Prakash Agarwalla</h3>
+            <strong><span>M.B.B.S, MD(Pathology)</span></strong>
+            <p>Consultant Pathologist</p>
+            <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="image/doc-5.jpg" alt="">
+            <h3>Dr. Siddharth Basak</h3>
+            <strong><span>M.B.B.S, D.C.H</span></strong>
+            <p>Child Specialist and General Physician</p>
+            <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="image/doc-6.jpg" alt="">
+            <h3>Dr. Shubarna Kr. Paul</h3>
+            <strong><span> M.B.B.S</span></strong>
+            <p>General Physician</p>
+            <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- doctors section ends -->
+
+<!-- appointmente section starts   -->
+
+<section class="appointment" id="appointment">
+
+    <h1 class="heading"> <span>appointment</span> now </h1>    
+
+    <div class="row">
+
+        <div class="image">
+            <img src="image/appointment-img.svg" alt="">
+        </div>
+
+        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+        <!-- <?php
+            if(isset($message)) {
+                foreach($message as $message) {
+                echo'<p class ="message">'.$message.'</p>';
+            }
+            }
+        ?> -->
+            <h3>make appointment</h3>
+            <input type="text"name="name" placeholder="your name" class="box" required>
+            <input type="tel"name="mobile" pattern="[0-9]{10}" placeholder="Enter 10-digit mobile number" class="box" required>           
+             <input type="text"name="Symptoms" placeholder="Symptoms Details" class="box" required>
+            <!-- <input type="number"name="number" placeholder="your number" class="box">
+            <input type="email"name="email" placeholder="your email" class="box"> -->
+            <input type="date"name="date" class="box" placeholder="Take Appointment Date" required>
+            <input type="submit" name="submit" value="appointment now" class="btn">
+        </form>
+
+    </div>
+
+</section>
+
+<!-- appointmenting section ends -->
+
+<!-- review section starts  -->
+
+<section class="review" id="review">
+    
+    <h1 class="heading"> Patient's <span>review</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="image/ABHISEKH.jpeg" alt="">
+            <h3>ABHISEKH NAYEK</h3>
+            <P>STUDENT</P>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p class="text">I have been using the NBU Health Center at for a few months now, and it has truly transformed my healthcare experience. The online appointment booking is incredibly convenient. The system's user-friendly interface makes it easy to access my medical records, providing a comprehensive view of my health history. Overall, a great initiative that has significantly improved the efficiency and accessibility of healthcare services on campus.</p>
+        </div>
+
+        <div class="box">
+            <img src="image/NITAI.jpeg" alt="">
+            <h3>NITAI NAYEK</h3>
+            <P>STUDENT</P>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+               
+            </div>
+            <p class="text">Navigating the NBU Health Center has been a game-changer for me. Being a student, the convenience of scheduling appointments online has saved me time, and the system's intuitive interface makes accessing my health records a breeze. The seamless integration of technology into healthcare services at NBU is commendable!</p>
+        </div>
+
+        <div class="box">
+            <img src="image/NABANITAI.jpeg" alt="">
+            <h3>NABANITAI PANDIT</h3>
+            <P>FACULTY MEMBER</P>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <p class="text">As a staff member at NBU, NBU Health Center has significantly improved the overall efficiency of healthcare services. The quick and easy appointment scheduling, along with the ability to communicate directly with healthcare providers, has made a positive impact. This system reflects NBU's commitment to fostering a healthy and supportive campus environment.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- review section ends -->
+
+<!-- notice section starts  -->
+
+<section class="notice" id="notice">
+
+    <h1 class="heading"> Inportent <span>notice</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <div class="image">
+                <img src="image\Notice-1.jpg" alt="">
+            </div>
+            <div class="content">
+                <div class="icon">
+                    <a href="#"> <i class="fas fa-calendar"></i> 31st January, 2024 </a>
+                    <a href="#"> <i class="fas fa-user"></i>  by Health Centre  </a>
+                </div>
+                <h3>Dengue Alert</h3>
+                <p>Use mosquito nets while sleeping, wea protective clothing, don't let water accumulate anywhere in the in the house or the surrounding areas. Don't wear clothes that expose your hand and legs.</p>
+                <a href="pdf\denguAlert.pdf" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="image/blog-2.jpg" alt="">
+            </div>
+            <div class="content">
+                <div class="icon">
+                    <a href="#"> <i class="fas fa-calendar"></i> 1st March, 2024 </a>
+                    <a href="#"> <i class="fas fa-user"></i> by Jakia Bunu,Health Centre </a>
+                </div>
+                <h3>AIDS awareness</h3>
+                <p>Join us in spreading awareness about AIDS, a crucial issue affecting millions globally. Learn the facts, challenge the stigma, and support those affected.Let's unite for AIDS awareness and make a positive impact on the lives of many.</p>
+                <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            </div>
+        </div>
+
+         <div class="box">
+            <div class="image">
+                <img src="image/blog-3.jpg" alt="">
+            </div>
+            <div class="content">
+                <div class="icon">
+                    <a href="#"> <i class="fas fa-calendar"></i> 20th March, 2024 </a>
+                    <a href="#"> <i class="fas fa-user"></i> by Health Centre </a>
+                </div>
+                <h3>Health Day Celebration</h3>
+                <p> <ul style="font-size: 15px;">
+                    <li>World Oral Health Day - March 20 </li>
+                    <li>World Down Syndrome Day - March 21 </li>
+                    <li>World Tuberculosis Day - March 24 [1]</li>
+                    <li>American Diabetes Alert Day - March 26 [1]</li>
+                </ul>
+                </p>
+                <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            </div>
+        </div>
+
+       <!-- <div class="box">
+            <div class="image">
+                <img src="image/blog-4.jpg" alt="">
+            </div>
+            <div class="content">
+                <div class="icon">
+                    <a href="#"> <i class="fas fa-calendar"></i> 21 november, 2022 </a>
+                    <a href="#"> <i class="fas fa-user"></i>  by Health Centre  </a>
+                </div>
+                <h3>Notice by NBU Health Centre</h3>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident, eius.</p>
+                <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            </div>
+        </div>
+        <div class="box">
+            <div class="image">
+                <img src="image/blog-5.jpg" alt="">
+            </div>
+            <div class="content">
+                <div class="icon">
+                    <a href="#"> <i class="fas fa-calendar"></i> 21 november, 2022 </a>
+                    <a href="#"> <i class="fas fa-user"></i>  by Health Centre </a>
+                </div>
+                <h3>Notice by NBU Health Centre</h3>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident, eius.</p>
+                <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            </div>
+        </div> 
+        <div class="box">
+            <div class="image">
+                <img src="image/blog-6.jpg" alt="">
+            </div>
+            <div class="content">
+                <div class="icon">
+                    <a href="#"> <i class="fas fa-calendar"></i> 21 november, 2022 </a>
+                    <a href="#"> <i class="fas fa-user"></i> by Health Centre </a>
+                </div>
+                <h3>Notice by NBU Health Centre</h3>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident, eius.</p>
+                <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            </div>
+        </div> -->
+
+    </div>
+
+</section>
+
+<!-- notice section ends -->
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#home"> <i class="fas fa-chevron-right"></i> home </a>
+            <a href="#about"> <i class="fas fa-chevron-right"></i> about </a>
+            <a href="#services"> <i class="fas fa-chevron-right"></i> services </a>
+            <a href="#doctors"> <i class="fas fa-chevron-right"></i> doctors </a>
+            <a href="#appointment"> <i class="fas fa-chevron-right"></i> appointment </a>
+            <a href="#review"> <i class="fas fa-chevron-right"></i> review </a>
+            <a href="#blogs"> <i class="fas fa-chevron-right"></i> blogs </a>
+        </div>
+
+        <div class="box">
+            <h3>our services</h3>
+            <a href="#"> <i class="fas fa-chevron-right"></i> Dental Care </a>
+            <a href="#"> <i class="fas fa-chevron-right"></i> Eye Checkup </a>
+            <a href="#"> <i class="fas fa-chevron-right"></i> Pathology Consultancy </a>
+            <a href="#"> <i class="fas fa-chevron-right"></i> Nutrition Care </a>
+            <a href="#"> <i class="fas fa-chevron-right"></i> ambulance service </a>
+        </div>
+
+        <div class="box">
+            <h3>appointment info</h3>
+            <a href="#"> <i class="fas fa-user"></i>  User Account</a>
+            <a href="#"> <i class="fas fa-phone"></i>+91 353 2699108 </a>
+            <a href="#"> <i class="fas fa-envelope"></i>  medicalofficer@nbu.ac.in </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Health Centre , University of North Bengal, Raja Rammohunpur, P.O.-NBU, District-Darjeeling, West Bengal, India, PIN-734013 </a>
+        </div>
+
+        <div class="box">
+            <h3>follow us</h3>
+            <!-- <a href="#"> <i class="fab fa-faceappointment-f"></i> faceappointment </a> -->
+            <a href="#"> <i class="fab fa-brand fa-google"></i> Google </a>
+            <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+            <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+            <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+            <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+        </div>
+
+    </div>
+
+    <div class="credit"> created by <span>RANJAN SAHOO</span> | all rights reserved </div>
+
+</section>
+
+<!-- footer section ends -->
+
+
+<!-- js file link  -->
+<script src="js/script.js"></script>
+
+</body>
+</html>
+
